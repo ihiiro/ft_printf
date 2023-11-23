@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:24:10 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/11/23 21:31:48 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:04:08 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ static int	handle_specifier(va_list ap, char spec, int *bytes)
 		if (!yputnbr((unsigned int)va_arg(ap, unsigned int), 0, bytes))
 			return (0);
 	}
+	// else if (spec == 'x' || spec == 'X' || spec == 'p')
+	// {
+	// 	if (!yputnbr_hex())
+	// 		return (0);
+	// }
 	return (1);
 }
 
@@ -71,10 +76,20 @@ int	ft_printf(const char *str, ...)
 	return (bytes);
 }
 
-// int	main(void)
-// {
-	
-// }
+int	main(void)
+{
+	// int	bytes = 0;
+	// yputnbr_hex(10, &bytes);
+
+	printf("%x", -2);
+}
 
 // %%%%? ??
 // %?(invalid) ??
+
+// 10
+// A
+
+// 10 / 16
+
+// 0123456789abcdef

@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 17:57:46 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/11/23 21:33:00 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:53:06 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,13 @@ int	yputnbr(long n, char c, int *bytes)
 	*bytes += 1;
 	return (1);
 }
+
+// int	yputnbr_hex(int dec, char *hex, int *bytes)
+// {
+// 	if (dec == 0)
+// 		return (1);
+// 	if (dec >= 16)
+// 		yputnbr_hex(dec / 16, hex, bytes);
+	
+// 	return (1);
+// }

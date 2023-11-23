@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:24:10 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/11/23 21:05:11 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:31:48 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,16 @@ static int	handle_specifier(va_list ap, char spec, int *bytes)
 		if (!yputstr(va_arg(ap, char *), bytes))
 			return (0);
 	}
-	// else if (spec == 'd' || spec == 'i')
-	// {
-	// 	if ()
-	// }
+	else if (spec == 'd' || spec == 'i')
+	{
+		if (!yputnbr(va_arg(ap, int), 0, bytes))
+			return (0);
+	}
+	else if (spec == 'u')
+	{
+		if (!yputnbr((unsigned int)va_arg(ap, unsigned int), 0, bytes))
+			return (0);
+	}
 	return (1);
 }
 
@@ -65,10 +71,10 @@ int	ft_printf(const char *str, ...)
 	return (bytes);
 }
 
-int	main(void)
-{
+// int	main(void)
+// {
 	
-}
+// }
 
 // %%%%? ??
 // %?(invalid) ??

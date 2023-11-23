@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:24:10 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/11/23 17:59:19 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:52:15 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static int	handle_specifier(va_list ap, char spec, int *bytes)
 		if (!yputstr(va_arg(ap, char*), bytes))
 			return (0);
 	}
+	// else if (spec == 'd' || spec == 'i')
+	// {
+	// 	// 
+	// }
 	return (1);
 }
 
@@ -39,7 +43,11 @@ int	ft_printf(const char *str, ...)
 		if (*str == '%')
 		{
 			if (*(str + 1) == '%')
-				write(1, "%", 1);
+			{
+				if (write(1, "%", 1) == -1)
+					return (-1);
+				bytes++;
+			}
 			else
 			{
 				if (!handle_specifier(ap, *(str + 1), &bytes))
@@ -48,7 +56,8 @@ int	ft_printf(const char *str, ...)
 			str += 2;
 			continue ;
 		}
-		write(1, str, 1);
+		if (write(1, str, 1) == -1)
+			return (-1);
 		str++;
 		bytes++;
 	}
@@ -58,7 +67,10 @@ int	ft_printf(const char *str, ...)
 
 // int	main(void)
 // {
-	
+// 	// ft_printf("f%d", 11);
+// 	// int bytes = 0;
+// 	char	c = 0;
+// 	yputnbr(22, c);
 // }
 
 // %%%%? ??

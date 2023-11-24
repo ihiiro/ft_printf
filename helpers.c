@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 17:57:46 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/11/23 21:53:06 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:21:44 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,45 @@ int	yputnbr(long n, char c, int *bytes)
 	return (1);
 }
 
-// int	yputnbr_hex(int dec, char *hex, int *bytes)
-// {
-// 	if (dec == 0)
-// 		return (1);
-// 	if (dec >= 16)
-// 		yputnbr_hex(dec / 16, hex, bytes);
-	
-// 	return (1);
-// }
+int	yputnbr_hex(long dec, long original, char *hex, int *bytes)
+{
+	if (dec == 0)
+	{
+		if (original == dec)
+		{
+			if (write(1, "0", 1) == -1)
+				return (0);
+			*bytes += 1;
+		}
+		return (1);
+	}
+	if (dec >= 16)
+	{
+		yputnbr_hex(dec / 16, original, hex, bytes);
+		if (write(1, &hex[dec % 16], 1) == -1)
+			return (0);
+		*bytes += 1;
+	}
+	else
+	{
+		if (write(1, &hex[dec], 1) == -1)
+			return (0);
+		*bytes += 1;
+		yputnbr_hex(dec / 16, original, hex, bytes);
+	}
+	return (1);
+}
+
+/*
+
+f(122, "", &bytes)
+f(7, "", &bytes)
+--> 7
+
+-1
+
+0000 0001
+1111 1111
+ffffffff
+
+*/

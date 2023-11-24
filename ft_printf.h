@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 10:17:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/11/23 21:32:55 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:14:01 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int	ft_printf(const char *format, ...);
 int	yputchar(char chr, int *bytes);
 int	yputstr(char *str, int *bytes);
 int	yputnbr(long n, char c, int *bytes);
+int	yputnbr_hex(long dec, long original, char *hex, int *bytes);
 
 #endif

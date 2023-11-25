@@ -6,11 +6,11 @@
 #    By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 10:12:23 by yel-yaqi          #+#    #+#              #
-#    Updated: 2023/11/25 11:54:20 by yel-yaqi         ###   ########.fr        #
+#    Updated: 2023/11/25 19:42:56 by yel-yaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ft_printf.c handle_specifier.c hex.c puts.c
+SRCS = ft_printf.c handles.c puts.c
 OBJS = $(SRCS:.c=.o)
 NAME = libftprintf.a
 CC = cc

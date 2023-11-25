@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_specifier.c                                 :+:      :+:    :+:   */
+/*   handles.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:52:28 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/11/25 19:30:51 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2023/11/25 19:43:14 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,25 @@ int	convertible(char spec)
 {
 	return (spec == 'c' || spec == 's' || spec == 'd' || spec == 'i'
 		|| spec == 'u' || spec == 'x' || spec == 'X' || spec == 'p');
+}
+
+int	handle_hex(int n, char spec, int *bytes)
+{
+	if (spec == 'x' && n >= 0)
+		if (!yputnbr_hex(n, n, "0123456789abcdef", bytes))
+			return (-1);
+	if (spec == 'x' && n < 0)
+		if (!yputnbr_hex((unsigned int)n, n, "0123456789abcdef", bytes))
+			return (-1);
+	if (spec == 'X' && n >= 0)
+		if (!yputnbr_hex(n, n, "0123456789ABCDEF", bytes))
+			return (-1);
+	if (spec == 'X' && n < 0)
+	{
+		if (!yputnbr_hex((unsigned int)n, n, "0123456789ABCDEF", bytes))
+			return (-1);
+	}
+	return (1);
 }
 
 int	handle_ad(unsigned long n, int *bytes)

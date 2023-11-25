@@ -2,3 +2,4 @@ a.out
 libftprintf.a
 *.o
 .vscode/
+a.out.dSYM/

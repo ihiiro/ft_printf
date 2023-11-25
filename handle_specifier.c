@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:52:28 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/11/25 13:36:42 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2023/11/25 19:30:51 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,41 @@ int	convertible(char spec)
 		|| spec == 'u' || spec == 'x' || spec == 'X' || spec == 'p');
 }
 
+int	handle_ad(unsigned long n, int *bytes)
+{
+	if (write(1, "0x", 2) == -1)
+		return (-1);
+	*bytes += 2;
+	if (yputad(n, n, "0123456789abcdef", bytes) == -1)
+		return (-1);
+	return (1);
+}
+
 int	handle_specifier(va_list ap, char spec, int *bytes)
 {
 	if (!convertible(spec))
 	{
 		if (write(1, &spec, 1) == -1)
-			return (0);
+			return (-1);
 		*bytes += 1;
-		return (1);
 	}
 	if (spec == 'c')
-		if (!yputchar(va_arg(ap, int), bytes))
-			return (0);
+		if (yputchar(va_arg(ap, int), bytes) == -1)
+			return (-1);
 	if (spec == 's')
-		if (!yputstr(va_arg(ap, char *), bytes))
-			return (0);
+		if (yputstr(va_arg(ap, char *), bytes) == -1)
+			return (-1);
 	if (spec == 'd' || spec == 'i')
-		if (!yputnbr(va_arg(ap, int), 0, bytes))
-			return (0);
+		if (yputnbr(va_arg(ap, int), 0, bytes) == -1)
+			return (-1);
 	if (spec == 'u')
-		if (!yputnbr((unsigned int)va_arg(ap, unsigned int), 0, bytes))
-			return (0);
-	if (spec == 'x' || spec == 'X' || spec == 'p')
-	{
-		if (!handle_hex(va_arg(ap, int), spec, bytes)) // --> unsigned long?
-			return (0);
-	}
+		if (yputnbr((unsigned int)va_arg(ap, unsigned int), 0, bytes) == -1)
+			return (-1);
+	if (spec == 'x' || spec == 'X')
+		if (handle_hex(va_arg(ap, int), spec, bytes) == -1)
+			return (-1);
+	if (spec == 'p')
+		if (handle_ad(va_arg(ap, unsigned long), bytes) == -1)
+			return (-1);
 	return (1);
 }

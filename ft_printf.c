@@ -6,33 +6,28 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:24:10 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/11/25 13:36:12 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2023/11/25 19:38:43 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *str, ...)
+int	traverse(va_list ap, const char *str, int *bytes)
 {
-	va_list	ap;
-	int		bytes;
-
-	va_start(ap, str);
-	bytes = 0;
 	while (*str)
 	{
 		if (*str == '%')
 		{
 			if (*(str + 1) == '\0')
 				break ;
-			if (*(str + 1) == '%') // --> handle_specifier.c
+			if (*(str + 1) == '%')
 			{
 				if (write(1, "%", 1) == -1)
 					return (-1);
-				bytes++;
+				*bytes += 1;
 			}
 			else
-				if (!handle_specifier(ap, *(str + 1), &bytes))
+				if (handle_specifier(ap, *(str + 1), bytes) == -1)
 					return (-1);
 			str += 2;
 			continue ;
@@ -40,26 +35,22 @@ int	ft_printf(const char *str, ...)
 		if (write(1, str, 1) == -1)
 			return (-1);
 		str++;
-		bytes++;
+		*bytes += 1;
 	}
+	return (1);
+}
+
+int	ft_printf(const char *str, ...)
+{
+	va_list	ap;
+	int		bytes;
+
+	va_start(ap, str);
+	if (write(1, "", 0) == -1)
+		return (-1);
+	bytes = 0;
+	if (traverse(ap, str, &bytes) == -1)
+		return (-1);
 	va_end(ap);
 	return (bytes);
 }
-
-// int	main(void)
-// {
-// 	printf("%d", printf(" % "));
-// }
-
-// %%%%? ??
-// %?(invalid) ??
-
-// 10
-// A
-
-// 10 / 16
-
-// 0123456789abcdef
-
-// 11110100
-// f4

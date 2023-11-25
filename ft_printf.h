@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 10:17:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/11/25 11:57:14 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:13:11 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ int	yputnbr_hex(long dec, long original, char *hex, int *bytes);
 int	handle_specifier(va_list ap, char spec, int *bytes);
 int	handle_hex(int n, char spec, int *bytes);
 int	handle_negx(int n, int *bytes);
+int	yputad(unsigned long dec, unsigned long original, char *hex, int *bytes);
+int	handle_ad(unsigned long n, int *bytes);
 
 #endif

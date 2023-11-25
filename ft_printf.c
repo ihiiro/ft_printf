@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:24:10 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/11/25 12:03:02 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:36:12 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	ft_printf(const char *str, ...)
 	{
 		if (*str == '%')
 		{
-			if (*(str + 1) == '%')
+			if (*(str + 1) == '\0')
+				break ;
+			if (*(str + 1) == '%') // --> handle_specifier.c
 			{
 				if (write(1, "%", 1) == -1)
 					return (-1);
@@ -46,7 +48,7 @@ int	ft_printf(const char *str, ...)
 
 // int	main(void)
 // {
-	
+// 	printf("%d", printf(" % "));
 // }
 
 // %%%%? ??
